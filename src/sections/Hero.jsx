@@ -33,79 +33,54 @@ export default function Hero() {
     <div style={{ fontFamily: "'Inter', 'Helvetica Neue', sans-serif" }}>
 
       {/* ── Navbar ── */}
-      <motion.nav
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.5 }}
+      {/* ── Navbar ── */}
+<motion.nav
+  initial={{ opacity: 0 }}
+  animate={{ opacity: 1 }}
+  transition={{ duration: 0.5 }}
+  style={{
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    padding: "1.2rem 1.5rem",
+    borderBottom: "1px solid #e5e5e5",
+    position: "sticky",
+    top: 0,
+    background: "#fafaf8",
+    zIndex: 50,
+  }}
+>
+  <span
+    onClick={() => scrollTo("about")}
+    style={{ fontWeight: 700, fontSize: "1.1rem", letterSpacing: "-0.02em", cursor: "pointer" }}
+  >
+    {personal.name.split(" ")[0]}
+    <span style={{ color: "#888" }}>.dev</span>
+  </span>
+
+  {/* Desktop nav */}
+  <div className="desktop-nav" style={{ display: "flex", gap: "2rem", alignItems: "center" }}>
+    {[
+      { label: "About",      id: "about" },
+      { label: "Experience", id: "experience" },
+      { label: "Extras",     id: "extras" },
+    ].map((item) => (
+      <button
+        key={item.id}
+        onClick={() => scrollTo(item.id)}
         style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          padding: "1.2rem 1.5rem",
-          borderBottom: "1px solid #e5e5e5",
-          position: "sticky",
-          top: 0,
-          background: "#fafaf8",
-          zIndex: 50,
+          fontSize: "0.875rem", color: "#444",
+          background: "none", border: "none",
+          fontWeight: 500, cursor: "pointer",
+          fontFamily: "'Inter', sans-serif",
+          padding: 0,
         }}
       >
-        <span
-          onClick={() => scrollTo("about")}
-          style={{ fontWeight: 700, fontSize: "1.1rem", letterSpacing: "-0.02em", cursor: "pointer" }}
-        >
-          {personal.name.split(" ")[0]}
-          <span style={{ color: "#888" }}>.dev</span>
-        </span>
-
-        {/* Desktop nav */}
-        <div className="desktop-nav" style={{ display: "flex", gap: "2rem", alignItems: "center" }}>
-          {[
-            { label: "About",      id: "about" },
-            { label: "Experience", id: "experience" },
-            { label: "Extras",     id: "extras" },
-            { label: "Contact",    id: "contact" },
-          ].map((item) => (
-            <button
-              key={item.id}
-              onClick={() => scrollTo(item.id)}
-              style={{
-                fontSize: "0.875rem", color: "#444",
-                background: "none", border: "none",
-                fontWeight: 500, cursor: "pointer",
-                fontFamily: "'Inter', sans-serif",
-                padding: 0,
-              }}
-            >
-              {item.label}
-            </button>
-          ))}
-          <button
-            onClick={() => scrollTo("contact")}
-            style={{
-              fontSize: "0.875rem", background: "#111", color: "#fff",
-              padding: "0.5rem 1.2rem", borderRadius: "6px",
-              border: "none", fontWeight: 500, cursor: "pointer",
-              fontFamily: "'Inter', sans-serif",
-            }}
-          >
-            Hire me
-          </button>
-        </div>
-
-        {/* Mobile hire me */}
-        <button
-          className="mobile-hire"
-          onClick={() => scrollTo("contact")}
-          style={{
-            fontSize: "0.8rem", background: "#111", color: "#fff",
-            padding: "0.4rem 1rem", borderRadius: "6px",
-            border: "none", fontWeight: 500, cursor: "pointer",
-            display: "none",
-          }}
-        >
-          Hire me
-        </button>
-      </motion.nav>
+        {item.label}
+      </button>
+    ))}
+  </div>
+</motion.nav>
 
       {/* ── Hero ── */}
       <section
@@ -188,10 +163,6 @@ export default function Hero() {
               {personal.bio}
             </p>
 
-            <div style={{ display: "flex", flexWrap: "wrap", gap: "0.6rem", marginBottom: "1.5rem" }}>
-              <a href={`mailto:${personal.email}`} style={chipStyle}>✉ {personal.email}</a>
-              <a href={`tel:${personal.phone}`} style={chipStyle}>☎ {personal.phone}</a>
-            </div>
 
             <div style={{ display: "flex", gap: "1.5rem", flexWrap: "wrap" }}>
               {Object.entries(personal.socials).map(([name, url]) => (
@@ -288,13 +259,12 @@ export default function Hero() {
         html { scroll-behavior: smooth; }
 
         @media (max-width: 768px) {
-          .hero-grid {
-            grid-template-columns: 1fr !important;
-            gap: 2rem !important;
-          }
-          .desktop-nav { display: none !important; }
-          .mobile-hire { display: inline-block !important; }
-        }
+  .hero-grid {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+  .desktop-nav { display: none !important; }
+}
       `}</style>
     </div>
   );
